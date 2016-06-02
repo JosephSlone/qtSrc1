@@ -9,7 +9,7 @@ ApplicationWindow {
     visible: true
     width: Screen.width
     height: Screen.height
-    color: "#758de1"
+    color: "steelblue"
     visibility: "FullScreen"
     title: qsTr("KDP Access Manager")
 
@@ -18,7 +18,7 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.margins: spacing
             Label {
-                text: "Patients"
+                text: "KDP Access Manager"
                 font.pointSize: 20
                 color: "steelblue"
             }
@@ -35,7 +35,7 @@ ApplicationWindow {
                       horizontalAlignment: Text.AlignHCenter
                       font.family: "Helvetica"
                       font.pointSize: 20
-                      color: "blue"
+                      color: "steelblue"
                       text: control.text
                     }
                 }
