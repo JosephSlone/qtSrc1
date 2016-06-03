@@ -1,3 +1,4 @@
+import Qt.labs.controls 1.0
 import QtQuick 2.6
 import QtQuick.Controls 1.5
 import QtQuick.Window 2.0
@@ -11,11 +12,8 @@ ApplicationWindow {
     height: Screen.height
     color: "steelblue"
 
-    //visibility: "FullScreen"
     visibility: "Maximized"
     title: qsTr("KDP Access Manager")
-
-
 
     onActiveChanged: {
         if (!active) {
@@ -55,10 +53,8 @@ ApplicationWindow {
 //                color: "steelblue"
 //            }
 
-            Item { Layout.fillWidth: true }
-
             Image {
-                source: "qrc:/images/drawer_lg.png"
+                source: "qrc:/images/drawer.png"
 
                 MouseArea {
                     anchors.fill: parent
@@ -68,27 +64,15 @@ ApplicationWindow {
                 }
             }
 
-            CheckBox {
-                id: fullScreen
-                text: "Full Screen"
-                style: CheckBoxStyle {
-                    indicator: Rectangle {
-                            implicitWidth: 16
-                            implicitHeight: 16
-                            radius: 3
-                            border.color: control.activeFocus ? "darkblue" : "gray"
-                            border.width: 1
-                            Rectangle {
-                                visible: control.checked
-                                color: "#555"
-                                border.color: "#333"
-                                radius: 1
-                                anchors.margins: 4
-                                anchors.fill: parent
-                            }
 
-                    }
-                }
+            Item { Layout.fillWidth: true }
+
+
+            Label {text: "Full Screen"}
+
+            Switch{
+                id: fullScreenSwitch
+                checked: false
                 onClicked: {
                     if ( checked ) {
                         root.visibility = Window.FullScreen
@@ -99,6 +83,38 @@ ApplicationWindow {
                 }
 
             }
+
+//            CheckBox {
+//                id: fullScreen
+//                text: "Full Screen"
+//                style: CheckBoxStyle {
+//                    indicator: Rectangle {
+//                            implicitWidth: 16
+//                            implicitHeight: 16
+//                            radius: 3
+//                            border.color: control.activeFocus ? "darkblue" : "gray"
+//                            border.width: 1
+//                            Rectangle {
+//                                visible: control.checked
+//                                color: "#555"
+//                                border.color: "#333"
+//                                radius: 1
+//                                anchors.margins: 4
+//                                anchors.fill: parent
+//                            }
+
+//                    }
+//                }
+//                onClicked: {
+//                    if ( checked ) {
+//                        root.visibility = Window.FullScreen
+//                    }
+//                    else {
+//                        root.visibility = Window.Maximized
+//                    }
+//                }
+
+//            }
 
 //            Image {
 //                id: minimize
@@ -125,6 +141,24 @@ ApplicationWindow {
         }
     }
 
+    Drawer {
+        id: navDrawer
+
+        Pane {
+            padding: 0
+            width: 100
+            height: root.height
+
+            ColumnLayout {
+                Label {
+                    text: "Menu Item 1"
+                }
+                Label {
+                    text: "Menu Item 2"
+                }
+            }
+        }
+    }
 
     Label {
         text: qsTr("Hello World")
