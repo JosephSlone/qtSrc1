@@ -23,5 +23,10 @@
         <file>images/qt-logo@4x.png</file>
         <file>MainWindow.qml</file>
         <file>MainWindow2.qml</file>
+        <file>images/powerButton.png</file>
+        <file>images/Minimize_Box_Blue.png</file>
+        <file>images/menu_lg.png</file>
+        <file>images/Minimize.png</file>
+        <file>images/drawer_lg.png</file>
     </qresource>
 </RCC>
