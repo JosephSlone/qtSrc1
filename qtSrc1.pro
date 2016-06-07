@@ -17,4 +17,5 @@ include(deployment.pri)
 HEADERS +=
 
 DISTFILES += \
-    MainWindow.qml
+    Patients.qml \
+    ContactModel.qml

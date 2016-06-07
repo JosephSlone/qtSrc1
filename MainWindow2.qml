@@ -1,9 +1,9 @@
-import Qt.labs.controls 1.0
-import QtQuick 2.6
-import QtQuick.Controls 1.5
+//import Qt.labs.controls 1.0
 import QtQuick.Window 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
+import QtQuick 2.6
+import QtQuick.Controls 1.5
 
 ApplicationWindow {
     id: root
@@ -34,21 +34,21 @@ ApplicationWindow {
             Image {
                 source: "qrc:/images/drawer.png"
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (navBarOpen)
-                        {
-                            navDrawer.close()
-                            navBarOpen = false
-                        }
-                        else
-                        {
-                            navDrawer.open()
-                            navBarOpen = true
-                        }
-                    }
-                }
+//                MouseArea {
+//                    anchors.fill: parent
+//                    onClicked: {
+//                        if (navBarOpen)
+//                        {
+//                            navDrawer.close()
+//                            navBarOpen = false
+//                        }
+//                        else
+//                        {
+//                            navDrawer.open()
+//                            navBarOpen = true
+//                        }
+//                    }
+//                }
             }
 
             Item { Layout.fillWidth: true }
@@ -57,8 +57,8 @@ ApplicationWindow {
             ComboBox {
                 width: 200
                 model: [ "Banana", "Apple", "Coconut" ]
-                anchors.right: fullScreenLabel
-                anchors.rightMargin: 25
+                //anchors.right: fullScreenLabel
+                //anchors.rightMargin: 25
             }
 
             Label {
@@ -79,29 +79,36 @@ ApplicationWindow {
         }
     }
 
-    Drawer {
-        id: navDrawer
-        y: toolBar.height
-        Pane {
-            padding: 0
-            width: 100
-            height: root.height-toolBar.height
+//    Drawer {
+//        id: navDrawer
+//        y: toolBar.height
+//        Pane {
+//            padding: 0
+//            width: 100
+//            height: root.height-toolBar.height
 
-            ColumnLayout {
-                Label {
-                    text: "Menu Item 1"
+//            ColumnLayout {
+//                Label {
+//                    text: "Menu Item 1"
 
-                }
-                Label {
-                    text: "Menu Item 2"
-                }
-            }
-        }
-    }
+//                }
+//                Label {
+//                    text: "Menu Item 2"
+//                }
+//            }
+//        }
+//    }
 
-    Label {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
+    StackView {
+        id: stackView
+        anchors.fill: parent
+
+        // Implements back key navigation
+        focus: true
+        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
+                             stackView.pop();
+                             event.accepted = true;
+                         }
     }
 
 }

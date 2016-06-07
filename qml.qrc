@@ -1,14 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>images/arrow.png</file>
-        <file>images/arrow@2x.png</file>
-        <file>images/arrow@3x.png</file>
-        <file>images/arrow@4x.png</file>
-        <file>images/arrows.png</file>
-        <file>images/arrows@2x.png</file>
-        <file>images/arrows@3x.png</file>
-        <file>images/arrows@4x.png</file>
         <file>images/drawer.png</file>
         <file>images/drawer@2x.png</file>
         <file>images/drawer@3x.png</file>
@@ -28,5 +20,15 @@
         <file>images/menu_lg.png</file>
         <file>images/Minimize.png</file>
         <file>images/drawer_lg.png</file>
+        <file>images/toolbar.png</file>
+        <file>MainWindow3.qml</file>
+        <file>images/navigation_next_item.png</file>
+        <file>images/navigation_previous_item.png</file>
+        <file>AndroidDelegate.qml</file>
+        <file>StackDelegate.qml</file>
+        <file>Patients.qml</file>
+        <file>ContactModel.qml</file>
+        <file>images/female.png</file>
+        <file>images/male.png</file>
     </qresource>
 </RCC>
