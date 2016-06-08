@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 
 ApplicationWindow {
+    id: root
     visible: true
     //visibility: Window.FullScreen
     visibility: Window.Maximized
@@ -51,10 +52,7 @@ ApplicationWindow {
                         stackView.pop()
                         patientLabel.visible = false;
                         patientActiveCombo.visible = false;
-                        patientActiveLabel.visible = false;
                         patientFacilities.visible = false;
-
-
                     }
                 }
             }
@@ -77,29 +75,55 @@ ApplicationWindow {
                 font.pointSize: 16
             }
 
-            ComboBox {
-                id: patientFacilities
-                model: ["All Facilities", "KDP", "Other"]
-                width: 200
-                activeFocusOnPress: true
-                visible: false
-            }
-
-            Label {
-                text: "Active"
-                visible: false
-                id: patientActiveLabel
-                color: "white"
-                font.pointSize: 16
-            }
             Switch {
                 id: patientActiveCombo
                 checked: true
                 visible: false
                 Layout.alignment: Qt.AlignRight
                 Layout.rightMargin: 10
+                style: switchStyle
 
             }
+
+            ComboBox {
+                id: patientFacilities
+                model: ["All Facilities", "KDP", "Other"]
+                width: 400
+                activeFocusOnPress: true
+                visible: false
+                style: ComboBoxStyle {
+                    background: Rectangle {
+                        radius: 5
+                        border.width: 2
+                        color: "#fff"
+                    }
+                    label: Text {
+                        font.pointSize: 16
+                        color: "black"
+                        text: control.currentText
+                    }
+                    property Component __dropDownStyle: MenuStyle {
+                        __maxPopupHeight: 600
+                        __menuItemType: "comboboxitem"
+
+                        frame: Rectangle {
+                            color: "#fff"
+                            border.width: 2
+                            radius: 5
+                        }
+
+                        itemDelegate.label: Text {
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            font.pointSize: 16
+                            text: styleData.text
+                        }
+                    }
+                }
+            }
+
+
+
 
         }
     }
@@ -151,13 +175,62 @@ ApplicationWindow {
                         {
                             patientLabel.visible = true;
                             patientActiveCombo.visible = true;
-                            patientActiveLabel.visible = true;
                             patientFacilities.visible = true;
                         }
 
                         stackView.push(Qt.resolvedUrl(page))
                     }
                 }
+            }
+        }
+    }
+
+    Component {
+        id: switchStyle
+        SwitchStyle {
+
+            groove: Rectangle {
+                implicitHeight: 50
+                implicitWidth: 200
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.bottom: parent.bottom
+                    width: parent.width/2 - 2
+                    height: 20
+                    anchors.margins: 2
+                    radius: 5
+                    color: control.checked ? "#468bb7" : "#222"
+                    Behavior on color {ColorAnimation {}}
+                    Text {
+                        font.pixelSize: 23
+                        color: "white"
+                        anchors.centerIn: parent
+                        text: "Active"
+                    }
+                }
+                Item {
+                    width: parent.width/2
+                    height: parent.height
+                    anchors.right: parent.right
+                    Text {
+                        font.pixelSize: 23
+                        color: "white"
+                        anchors.centerIn: parent
+                        text: "Inactive"
+                    }
+                }
+                color: "#222"
+                border.color: "#444"
+                border.width: 2
+            }
+            handle: Rectangle {
+                width: parent.parent.width/2
+                height: control.height
+                color: "#444"
+                border.color: "#555"
+                border.width: 2
+                radius: 5
             }
         }
     }

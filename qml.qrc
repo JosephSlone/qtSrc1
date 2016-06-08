@@ -30,5 +30,7 @@
         <file>ContactModel.qml</file>
         <file>images/female.png</file>
         <file>images/male.png</file>
+        <file>Accesses.qml</file>
+        <file>AccessList.qml</file>
     </qresource>
 </RCC>

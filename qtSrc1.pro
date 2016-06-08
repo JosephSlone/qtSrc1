@@ -18,4 +18,6 @@ HEADERS +=
 
 DISTFILES += \
     Patients.qml \
-    ContactModel.qml
+    ContactModel.qml \
+    Accesses.qml \
+    AccessList.qml
