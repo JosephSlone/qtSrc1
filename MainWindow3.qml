@@ -144,7 +144,7 @@ ApplicationWindow {
         }
         ListElement {
             title: "Access Types"
-            page: "Accesses.qml"
+            page: "AccessGrid.qml"
         }
 
     }

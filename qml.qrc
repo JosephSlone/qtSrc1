@@ -32,5 +32,6 @@
         <file>images/male.png</file>
         <file>Accesses.qml</file>
         <file>AccessList.qml</file>
+        <file>AccessGrid.qml</file>
     </qresource>
 </RCC>
