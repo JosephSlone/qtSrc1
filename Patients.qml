@@ -96,8 +96,6 @@ Rectangle {
                 }
             }
 
-
-
             MouseArea {
                 z: 1
                 anchors.fill: content
@@ -115,8 +113,6 @@ Rectangle {
         anchors.fill: parent
         anchors.topMargin: 5
         anchors.leftMargin: 5
-
-
 
         cellHeight: 700
         // cellWidth: 660

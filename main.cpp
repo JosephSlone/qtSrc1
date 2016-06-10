@@ -20,13 +20,18 @@ int main(int argc, char *argv[])
     qDebug() << "Patient Rows: " << patientModel.rowCount();
 
     SqlQueryModel accessModel;
-    accessModel.setQuery("SELECT Name FROM accesses");
+    accessModel.setQuery("SELECT * FROM accesses");
     qDebug() << "Access Rows: " << accessModel.rowCount();
+
+    SqlQueryModel facilityModel;
+    facilityModel.setQuery("SELECT * FROM facility ORDER BY facilityName");
+    qDebug() << "Facility Rows: " << facilityModel.rowCount();
 
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("accessList", &accessModel);
     engine.rootContext()->setContextProperty("patientList", &patientModel);
+    engine.rootContext()->setContextProperty("facilityList", &facilityModel);
     engine.load(QUrl(QStringLiteral("qrc:/MainWindow3.qml")));
 
     QQuickWindow* window = qobject_cast<QQuickWindow*>(engine.rootObjects().at(0));

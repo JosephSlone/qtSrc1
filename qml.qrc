@@ -9,12 +9,6 @@
         <file>images/menu@2x.png</file>
         <file>images/menu@3x.png</file>
         <file>images/menu@4x.png</file>
-        <file>images/qt-logo.png</file>
-        <file>images/qt-logo@2x.png</file>
-        <file>images/qt-logo@3x.png</file>
-        <file>images/qt-logo@4x.png</file>
-        <file>MainWindow.qml</file>
-        <file>MainWindow2.qml</file>
         <file>images/powerButton.png</file>
         <file>images/Minimize_Box_Blue.png</file>
         <file>images/menu_lg.png</file>
@@ -30,8 +24,12 @@
         <file>ContactModel.qml</file>
         <file>images/female.png</file>
         <file>images/male.png</file>
-        <file>Accesses.qml</file>
-        <file>AccessList.qml</file>
         <file>AccessGrid.qml</file>
+        <file>FacilitiesGrid.qml</file>
+        <file>images/facility.png</file>
+        <file>images/DialysisIcon.png</file>
+        <file>images/doctor.png</file>
+        <file>images/patients.png</file>
+        <file>EditFacility.qml</file>
     </qresource>
 </RCC>

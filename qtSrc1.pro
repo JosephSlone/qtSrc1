@@ -5,7 +5,8 @@ QT += qml quick widgets sql
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    sqlquerymodel.cpp
+    sqlquerymodel.cpp \
+    sqlrelationatablemodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -16,11 +17,12 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    sqlquerymodel.h
+    sqlquerymodel.h \
+    sqlrelationatablemodel.h
 
 DISTFILES += \
     Patients.qml \
     ContactModel.qml \
-    Accesses.qml \
-    AccessList.qml \
-    AccessGrid.qml
+    AccessGrid.qml \
+    FacilitiesGrid.qml \
+    EditFacility.qml

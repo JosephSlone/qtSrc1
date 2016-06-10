@@ -5,13 +5,12 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 
 ApplicationWindow {
-    id: root
+    id: rootWindow
     visible: true
     //visibility: Window.FullScreen
     visibility: Window.Maximized
     width: 800
     height: 1200
-
     title: "KDP Access Manager"
 
     Rectangle {
@@ -121,10 +120,6 @@ ApplicationWindow {
                     }
                 }
             }
-
-
-
-
         }
     }
 
@@ -133,18 +128,22 @@ ApplicationWindow {
         ListElement {
             title: "Patients"
             page: "Patients.qml"
+            icon: "images/patients.png"
         }
         ListElement {
             title: "Facilities"
-            page: "Facilities.qml"
+            page: "FacilitiesGrid.qml"
+            icon: "images/facility.png"
         }
         ListElement {
             title: "Physicians"
             page: "Physicians.qml"
+            icon: "images/doctor.png"
         }
         ListElement {
             title: "Access Types"
             page: "AccessGrid.qml"
+            icon: "images/DialysisIcon.png"
         }
 
     }
@@ -162,13 +161,12 @@ ApplicationWindow {
         initialItem: Item {
             width: parent.width
             height: parent.height
+
             ListView {
                 model: pageModel
                 anchors.fill: parent
                 delegate:StackDelegate {
-                    text: { title
-
-                    }
+//                    text: {title }
 
                     onClicked: {
                         if (page == "Patients.qml")

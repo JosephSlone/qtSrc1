@@ -3,7 +3,7 @@ import QtQuick 2.6
 Item {
     id: root
     width: parent.width
-    height: 88
+    height: 256 + 10
 
     property alias text: textitem.text
     signal clicked
@@ -14,13 +14,23 @@ Item {
         visible: mouse.pressed
     }
 
+    Image {
+        id: imageItem
+        anchors.left: parent.left
+        anchors.leftMargin: 30
+        source: icon
+        height: 256
+        width: 256
+    }
+
     Text {
         id: textitem
         color: "white"
-        font.pixelSize: 32
-        text: modelData
+        font.pointSize:  38
+        //text: modelData
+        text: title
         anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
+        anchors.left: imageItem.right
         anchors.leftMargin: 30
     }
 
@@ -36,7 +46,7 @@ Item {
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.verticalCenter: parent.verticalCenter
-        source: "../images/navigation_next_item.png"
+        source: "images/navigation_next_item.png"
     }
 
     MouseArea {
