@@ -5,6 +5,7 @@
 #include <QDebug>
 
 #include "sqlquerymodel.h"
+#include "sqltablemodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,9 +24,15 @@ int main(int argc, char *argv[])
     accessModel.setQuery("SELECT * FROM accesses");
     qDebug() << "Access Rows: " << accessModel.rowCount();
 
-    SqlQueryModel facilityModel;
-    facilityModel.setQuery("SELECT * FROM facility ORDER BY facilityName");
+    SqlTableModel facilityModel;
+    facilityModel.setTable("facility");
+    facilityModel.setSort(1,Qt::AscendingOrder);
+    facilityModel.select();
+    facilityModel.generateRoleNames();
+    facilityModel.setEditStrategy(QSqlTableModel::OnFieldChange);
     qDebug() << "Facility Rows: " << facilityModel.rowCount();
+
+
 
 
     QQmlApplicationEngine engine;

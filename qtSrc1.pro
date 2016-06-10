@@ -6,7 +6,8 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     sqlquerymodel.cpp \
-    sqlrelationatablemodel.cpp
+    sqltablemodel.cpp \
+    facilitytablemodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,7 +19,8 @@ include(deployment.pri)
 
 HEADERS += \
     sqlquerymodel.h \
-    sqlrelationatablemodel.h
+    sqltablemodel.h \
+    facilitytablemodel.h
 
 DISTFILES += \
     Patients.qml \

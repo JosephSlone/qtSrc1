@@ -86,6 +86,7 @@ Rectangle {
                 onClicked: {
                     console.log(facilityName);
                     console.log(id);
+                    facilityName = "New Name";
                     stackView.push(
                         {
                             item: Qt.resolvedUrl("EditFacility.qml"),
