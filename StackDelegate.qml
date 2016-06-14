@@ -33,7 +33,8 @@ Item {
     Text {
         id: textitem
         color: "white"
-        font.pointSize:  38
+        //font.pointSize:  38
+        font.pointSize: rootRow.height/3
         text: title
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: imageItem.right
