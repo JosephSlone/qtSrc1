@@ -21,7 +21,6 @@ Rectangle {
             return "unknown";
         }
 
-
     Component {
         id: patientDelegate
         Rectangle {
@@ -85,8 +84,8 @@ Rectangle {
                 anchors.right: content.right
                 anchors.rightMargin: 5
                 anchors.topMargin: 10
-                height: 256
-                width: 256
+                height: parent.width/2.75
+                width: parent.width/2.75
                 Image {
                     id: portrait
                     source: "images/female.png"
@@ -114,10 +113,9 @@ Rectangle {
         anchors.topMargin: 5
         anchors.leftMargin: 5
 
-        cellHeight: 700
-        // cellWidth: 660
 
-        cellWidth: {(orientationToString(Screen.primaryOrientation) === "landscape") ? 681 : (Screen.width/2) - 4 }
+        cellWidth: {(orientationToString(Screen.primaryOrientation) === "landscape") ? (Screen.width/4) - 4 : (Screen.width/2) - 4 }
+        cellHeight: cellWidth * 1.25
 
         model: patientList
         delegate: patientDelegate
