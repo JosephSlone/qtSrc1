@@ -1,9 +1,9 @@
 import QtQuick 2.6
 
 Item {
-    id: root
-    width: parent.width
-    height: 256 + 10
+    id: rootRow
+    width: rootWindow.width
+    height: rootWindow.height / 6
 
     property alias text: textitem.text
     signal clicked
@@ -14,20 +14,26 @@ Item {
         visible: mouse.pressed
     }
 
-    Image {
+    Rectangle {
         id: imageItem
+        color: "#424246"
         anchors.left: parent.left
         anchors.leftMargin: 30
-        source: icon
-        height: 256
-        width: 256
+        anchors.verticalCenter: parent.verticalCenter
+        height: rootRow.height - 15
+        width: rootRow.height - 15
+        Image {
+            source: icon
+            fillMode: Image.PreserveAspectFit
+            width: imageItem.width
+            height: imageItem.height
+        }
     }
 
     Text {
         id: textitem
         color: "white"
         font.pointSize:  38
-        //text: modelData
         text: title
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: imageItem.right
