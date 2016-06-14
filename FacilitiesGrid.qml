@@ -3,7 +3,7 @@ import QtQuick.Controls 1.0
 import QtQuick.Dialogs 1.2
 
 Rectangle {
-    color: "#424246"
+    color: "#847a7a"
 
     Component {
         id: facilityDelegate
@@ -41,7 +41,7 @@ Rectangle {
 
             Text {
                 id: facilityCityState
-                text: city + ", " + state + " " + zipcode
+                text: city + ", " + facilityState + " " + zipcode
                 anchors.top: facilityAddress.bottom
                 anchors.left: content.left
                 anchors.topMargin: 10
@@ -90,7 +90,14 @@ Rectangle {
                     stackView.push(
                         {
                             item: Qt.resolvedUrl("EditFacility.qml"),
-                            properties: {currentId: id}
+                            properties: {
+                                        currentId: id,
+                                        facilityNameTxt: facilityName,
+                                        facilityAddress: address,
+                                        facilityCity: city,
+                                        facilityStateName: facilityState,
+                                        facilityZipCode: zipcode
+                                    }
                         }
                     )
                 }
@@ -107,7 +114,7 @@ Rectangle {
         anchors.leftMargin: 5
 
         cellWidth: 500
-        cellHeight: 600
+        cellHeight: 400
 
         model: facilityList
         delegate: facilityDelegate

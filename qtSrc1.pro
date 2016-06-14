@@ -27,4 +27,5 @@ DISTFILES += \
     ContactModel.qml \
     AccessGrid.qml \
     FacilitiesGrid.qml \
-    EditFacility.qml
+    EditFacility.qml \
+    ReusableTextField.qml
