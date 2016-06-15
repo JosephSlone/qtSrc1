@@ -13,6 +13,23 @@ ApplicationWindow {
     height: 1200
     title: "KDP Access Manager"
 
+    function orientationToString(o) {
+            switch (o) {
+            case Qt.PrimaryOrientation:
+                return "primary";
+            case Qt.PortraitOrientation:
+                return "portrait";
+            case Qt.LandscapeOrientation:
+                return "landscape";
+            case Qt.InvertedPortraitOrientation:
+                return "inverted portrait";
+            case Qt.InvertedLandscapeOrientation:
+                return "inverted landscape";
+            }
+            return "unknown";
+        }
+
+
     Rectangle {
         color: "#212126"
         anchors.fill: parent
@@ -165,9 +182,7 @@ ApplicationWindow {
             ListView {
                 model: pageModel
                 anchors.fill: parent
-                delegate:StackDelegate {
-//                    text: {title }
-
+                delegate: StackDelegate {
                     onClicked: {
                         if (page == "Patients.qml")
                         {
@@ -178,6 +193,30 @@ ApplicationWindow {
 
                         stackView.push(Qt.resolvedUrl(page))
                     }
+                }
+            }
+        }
+
+        delegate: StackViewDelegate {
+            function transitionFinished(properties)
+            {
+                properties.exitItem.opacity = 1
+            }
+
+            pushTransition: StackViewTransition {
+                PropertyAnimation {
+                    target: enterItem
+                    property: "opacity"
+                    from: 0
+                    to: 1
+                    duration: 500
+                }
+                PropertyAnimation {
+                    target: exitItem
+                    property: "opacity"
+                    from: 1
+                    to: 0
+                    duration: 500
                 }
             }
         }

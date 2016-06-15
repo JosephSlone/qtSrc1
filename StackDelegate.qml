@@ -10,18 +10,18 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: "#11ffffff"
+        color: "#212126"
         visible: mouse.pressed
     }
 
     Rectangle {
         id: imageItem
-        color: "#424246"
+        color: "#212126"
         anchors.left: parent.left
         anchors.leftMargin: 30
         anchors.verticalCenter: parent.verticalCenter
-        height: rootRow.height - 15
-        width: rootRow.height - 15
+        height: rootRow.height - 25
+        width: rootRow.height - 25
         Image {
             source: icon
             fillMode: Image.PreserveAspectFit
@@ -33,8 +33,7 @@ Item {
     Text {
         id: textitem
         color: "white"
-        //font.pointSize:  38
-        font.pointSize: rootRow.height/3
+        font.pointSize: rootRow.height/5
         text: title
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: imageItem.right
@@ -49,6 +48,7 @@ Item {
         color: "#424246"
     }
 
+
     Image {
         anchors.right: parent.right
         anchors.rightMargin: 20
@@ -59,7 +59,7 @@ Item {
     MouseArea {
         id: mouse
         anchors.fill: parent
-        onClicked: root.clicked()
+        onClicked: rootRow.clicked()
 
     }
 }
