@@ -35,110 +35,82 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
+// -- Beginning of ToolBar -- //
+
     toolBar: BorderImage {
+        id: theToolBar
         border.bottom: 8
         source: "images/toolbar.png"
         width: parent.width
         height: 100
 
-        RowLayout {
+        Rectangle {
+            id: toolBarRectangle
             anchors.fill: parent
+            height: parent.height - 25
+            width: parent.width
+            color: "black"
 
-            Rectangle {
-                id: backButton
-                width: opacity ? 60 : 0
+            RowLayout {
                 anchors.left: parent.left
-                anchors.leftMargin: 20
-                opacity: stackView.depth > 1 ? 1 : 0
-                anchors.verticalCenter: parent.verticalCenter
-                antialiasing: true
-                height: 60
-                radius: 4
-                color: backmouse.pressed ? "#222" : "transparent"
-                Behavior on opacity { NumberAnimation{} }
-                Image {
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+
+                Rectangle {
+                    id: backButton
+                    width: opacity ? 60 : 0
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    opacity: stackView.depth > 1 ? 1 : 0
                     anchors.verticalCenter: parent.verticalCenter
-                    source: "images/navigation_previous_item.png"
-                }
-                MouseArea {
-                    id: backmouse
-                    anchors.fill: parent
-                    anchors.margins: -10
-                    onClicked: {
-                        stackView.pop()
-                        patientLabel.visible = false;
-                        patientActiveCombo.visible = false;
-                        patientFacilities.visible = false;
+                    antialiasing: true
+                    height: 60
+                    radius: 4
+                    color: backmouse.pressed ? "#222" : "transparent"
+                    Behavior on opacity { NumberAnimation{} }
+                    Image {
+                        anchors.verticalCenter: parent.verticalCenter
+                        source: "images/navigation_previous_item.png"
+                    }
+                    MouseArea {
+                        id: backmouse
+                        anchors.fill: parent
+                        anchors.margins: -10
+                        onClicked: stackView.pop()
                     }
                 }
-            }
 
-            Text {
-                font.pointSize: 28
-                Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
-                x: backButton.x + backButton.width + 20
-                anchors.verticalCenter: parent.verticalCenter
-                color: "white"
-                text: "Access Manager"
-            }
+                Text {
+                    font.pixelSize: 42
+                    Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
+                    x: backButton.x + backButton.width + 20
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: "white"
+                    text: "Access Manager"
+                }
 
-            Item {Layout.fillWidth: true }
-            Label {
-                id: patientLabel
-                visible: false
-                text: "Patients:"
-                color: "white"
-                font.pointSize: 16
-            }
+                Loader {
+                    sourceComponent: fakeItem
+                }
 
-            Switch {
-                id: patientActiveCombo
-                checked: true
-                visible: false
-                Layout.alignment: Qt.AlignRight
-                Layout.rightMargin: 10
-                style: switchStyle
-
-            }
-
-            ComboBox {
-                id: patientFacilities
-                model: ["All Facilities", "KDP", "Other"]
-                width: 400
-                activeFocusOnPress: true
-                visible: false
-                style: ComboBoxStyle {
-                    background: Rectangle {
-                        radius: 5
-                        border.width: 2
-                        color: "#fff"
-                    }
-                    label: Text {
-                        font.pointSize: 16
-                        color: "black"
-                        text: control.currentText
-                    }
-                    property Component __dropDownStyle: MenuStyle {
-                        __maxPopupHeight: 600
-                        __menuItemType: "comboboxitem"
-
-                        frame: Rectangle {
-                            color: "#fff"
-                            border.width: 2
-                            radius: 5
-                        }
-
-                        itemDelegate.label: Text {
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                            font.pointSize: 16
-                            text: styleData.text
-                        }
-                    }
+                Text {
+                    text: "Hello World!"
+                    color: "white"
+                    anchors.right: toolBarRectangle.right
                 }
             }
         }
+        Component {
+            id: fakeItem
+
+            Button {
+                text: "Click Me!"
+            }
+        }
     }
+
+// --- End of ToolBar -- //
 
     ListModel {
         id: pageModel
@@ -182,15 +154,9 @@ ApplicationWindow {
             ListView {
                 model: pageModel
                 anchors.fill: parent
+
                 delegate: StackDelegate {
                     onClicked: {
-                        if (page == "Patients.qml")
-                        {
-                            patientLabel.visible = true;
-                            patientActiveCombo.visible = true;
-                            patientFacilities.visible = true;
-                        }
-
                         stackView.push(Qt.resolvedUrl(page))
                     }
                 }
@@ -198,6 +164,7 @@ ApplicationWindow {
         }
 
         delegate: StackViewDelegate {
+
             function transitionFinished(properties)
             {
                 properties.exitItem.opacity = 1

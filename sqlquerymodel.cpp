@@ -1,9 +1,10 @@
 #include "SqlQueryModel.h"
 #include <QSqlRecord>
 #include <QSqlField>
+#include <QDebug>
 
 SqlQueryModel::SqlQueryModel(QObject *parent) :
-    QSqlQueryModel(parent)
+    QSqlTableModel(parent)
 {
 }
 
@@ -25,6 +26,7 @@ void SqlQueryModel::generateRoleNames()
     for( int i = 0; i < record().count(); i ++) {
         m_roleNames.insert(Qt::UserRole + i + 1, record().fieldName(i).toUtf8());
     }
+//    qDebug() << "m_roleNames: " << m_roleNames;
 }
 
 QVariant SqlQueryModel::data(const QModelIndex &index, int role) const

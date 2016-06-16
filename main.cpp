@@ -5,6 +5,7 @@
 #include <QDebug>
 
 #include "sqlquerymodel.h"
+#include "facilitymodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,15 +24,17 @@ int main(int argc, char *argv[])
     accessModel.setQuery("SELECT * FROM accesses");
     qDebug() << "Access Rows: " << accessModel.rowCount();
 
-    SqlQueryModel facilityModel;
-    facilityModel.setQuery("SELECT * FROM facility ORDER BY facilityName");
-    qDebug() << "Facility Rows: " << facilityModel.rowCount();
-
+    FacilityModel facilities;
+    //facilities.setQuery("SELECT * FROM facility ORDER BY facilityName");
+    facilities.setTable("facility");
+    facilities.setSort(1, Qt::AscendingOrder);
+    facilities.select();
+    qDebug() << "Facility Rows: " << facilities.rowCount();
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("accessList", &accessModel);
     engine.rootContext()->setContextProperty("patientList", &patientModel);
-    engine.rootContext()->setContextProperty("facilityList", &facilityModel);
+    engine.rootContext()->setContextProperty("facilityList", &facilities);
     engine.load(QUrl(QStringLiteral("qrc:/MainWindow3.qml")));
 
     QQuickWindow* window = qobject_cast<QQuickWindow*>(engine.rootObjects().at(0));

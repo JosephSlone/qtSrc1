@@ -7,6 +7,7 @@ import QtQml 2.2
 Rectangle {
     color: "#847a7a"
 
+
     Component {
         id: facilityDelegate
 
@@ -120,7 +121,8 @@ Rectangle {
                             {
                                 item: Qt.resolvedUrl("EditFacility.qml"),
                                 properties: {
-                                            currentId: id,
+                                            currentId: index,
+                                            facilityId: id,
                                             facilityNameTxt: facilityName,
                                             facilityAddress: address,
                                             facilityCity: city,

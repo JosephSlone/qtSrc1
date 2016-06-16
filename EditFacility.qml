@@ -8,6 +8,7 @@ Item {
     focus: true
 
     property int currentId
+    property int facilityId
     property string facilityNameTxt
     property string facilityAddress
     property string facilityCity
@@ -209,11 +210,63 @@ Item {
                     id: facilityZipCodeField
                     font.pointSize: 18
                     placeholderText: "Zip Code"
-                    text: facilityList.currentRecord
+                    text: facilityZipCode
                     width: facilityContainer.width - facilityAddressLabel.width - 100
                     style: activeFocus ? textFieldFocused : textFieldStyle
                 }
             }
+
+//            Row {
+//                id: facilityIdRow
+//                height: 50
+//                width: parent.width
+
+//                Label {
+//                    id: facilityIdLabel
+//                    width: facilityNameLabel.width
+//                    height: 30
+//                    color: "orange"
+//                    text: qsTr("FacilityID:")
+//                    font.pointSize: 18
+//                    font.bold: true
+//                }
+
+//                TextField {
+//                    id: facilityIDField
+//                    font.pointSize: 18
+//                    placeholderText: "Facility ID"
+//                    text: facilityId
+//                    width: facilityContainer.width - facilityAddressLabel.width - 100
+//                    style: activeFocus ? textFieldFocused : textFieldStyle
+//                }
+
+//            }
+
+//            Row {
+//                id: aRow
+//                height: 50
+//                width: parent.width
+
+//                Label {
+//                    id: facilityRecNumberLabel
+//                    width: facilityNameLabel.width
+//                    height: 30
+//                    color: "orange"
+//                    text: qsTr("Record Number: ")
+//                    font.pointSize: 18
+//                    font.bold: true
+//                }
+
+//                    TextField {
+//                        id: facilityRecNumberField
+//                        font.pointSize: 18
+//                        placeholderText: "Record Number"
+//                        text: currentId
+//                        width: facilityContainer.width - facilityAddressLabel.width - 100
+//                        style: activeFocus ? textFieldFocused : textFieldStyle
+//                    }
+//            }
+
         }
 
         Button {
@@ -228,6 +281,19 @@ Item {
             tooltip: "Save Changes"
             isDefault: true
             style: buttonStyle
+            onClicked: {
+//                console.log("Calling UpDateRecord");
+//                console.log("--------------------");
+//                console.log("Row Number: " + currentId);
+                facilityList.updateRecord(currentId,
+                                          facilityId,
+                                          facilityNameField.text,
+                                          facilityAddressField.text,
+                                          facilityCityField.text,
+                                          facilityStateField.text,
+                                          facilityZipCodeField.text
+                                          );
+            }
         }
 
         Button {
@@ -242,6 +308,9 @@ Item {
             tooltip: "Cancel Changes"
             isDefault: true
             style: buttonStyle
+            onClicked: {
+                stackView.pop();
+            }
         }
 
     }
