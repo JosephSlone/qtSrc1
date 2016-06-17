@@ -132,7 +132,8 @@ Rectangle {
                                             facilityAddress: address,
                                             facilityCity: city,
                                             facilityStateName: facilityState,
-                                            facilityZipCode: zipcode
+                                            facilityZipCode: zipcode,
+                                            editMode: "Edit",
                                         }
                             }
                         )

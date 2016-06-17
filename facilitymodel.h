@@ -14,9 +14,13 @@ public:
     void generateRoleNames();
 
 public slots:
-    bool updateRecord(const QString &msg);
+
     bool updateRecord(int recNumber, int facilityId, QString facilityName, QString address,
                       QString city, QString facilityState, QString zipcode);
+
+    bool newRecord(QString facilityName, QString address,
+                   QString city, QString facilityState, QString zipcode);
+
 
 };
 

@@ -30,6 +30,15 @@ Item {
             iconSource: "images/plus-5-128.png"
             onClicked: {
                 console.log("New Record Button Clicked")
+                stackView.push(
+                    {
+                        item: Qt.resolvedUrl("EditFacility.qml"),
+                        properties: {
+                                    editMode: "New"
+                                }
+                    }
+                )
+
             }
         }
         anchors.right: parent.right

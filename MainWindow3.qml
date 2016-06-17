@@ -29,6 +29,19 @@ ApplicationWindow {
             return "unknown";
         }
 
+    function setMenuBar() {
+        console.log("StackView.depth: ", stackView.depth);
+        console.log("StackView.currentItem: ", stackView.currentItem.objectName);
+        switch (stackView.currentItem.objectName) {
+        case "rootView":
+            menuBarLoader.source = "emptyItem.qml"
+            break;
+        case "facilitiesGridView":
+            menuBarLoader.source = "facilitiesMenu.qml"
+            break;
+        }
+    }
+
 
     Rectangle {
         color: "#212126"
@@ -71,17 +84,8 @@ ApplicationWindow {
                     anchors.fill: parent
                     anchors.margins: -10
                     onClicked: {
-                        stackView.pop()
-                        console.log("StackView.depth: ", stackView.depth);
-                        console.log("StackView.currentItem: ", stackView.currentItem.objectName);
-                        switch (stackView.currentItem.objectName) {
-                        case "rootView":
-                            menuBarLoader.source = "emptyItem.qml"
-                            break;
-                        case "facilitiesGridView":
-                            menuBarLoader.source = "facilitiesMenu.qml"
-                            break;
-                        }
+                        stackView.pop();
+                        setMenuBar();
                     }
                 }
             }
@@ -95,6 +99,7 @@ ApplicationWindow {
                 color: "white"
                 text: "Access Manager"
             }
+
 
             Rectangle {
                 id: menuBarContainer
