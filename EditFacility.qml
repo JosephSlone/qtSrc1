@@ -7,6 +7,11 @@ Item {
     id: facilityEditor
     focus: true
 
+    Component.onCompleted: {
+        menuBarLoader.source = "emptyItem.qml"
+    }
+
+
     property int currentId
     property int facilityId
     property string facilityNameTxt

@@ -3,7 +3,7 @@ import QtQuick 2.6
 Item {
     id: rootRow
     width: rootWindow.width
-    height: rootWindow.height / 6
+    height: rootWindow.height / 7
 
     property alias text: textitem.text
     signal clicked
@@ -33,7 +33,7 @@ Item {
     Text {
         id: textitem
         color: "white"
-        font.pointSize: rootRow.height/5
+        font.pointSize: rootRow.height/6
         text: title
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: imageItem.right

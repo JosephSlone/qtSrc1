@@ -6,7 +6,12 @@ import QtQml 2.2
 
 Rectangle {
     color: "#847a7a"
+    id: facilitiesRoot
+    objectName: "facilitiesGridView"
 
+    Component.onCompleted: {
+        menuBarLoader.source = "facilitiesMenu.qml"
+    }
 
     Component {
         id: facilityDelegate

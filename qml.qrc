@@ -31,5 +31,9 @@
         <file>images/doctor.png</file>
         <file>images/patients.png</file>
         <file>EditFacility.qml</file>
+        <file>emptyItem.qml</file>
+        <file>facilitiesMenu.qml</file>
+        <file>images/plus-48.png</file>
+        <file>images/plus-5-128.png</file>
     </qresource>
 </RCC>

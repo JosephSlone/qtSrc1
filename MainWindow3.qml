@@ -37,77 +37,87 @@ ApplicationWindow {
 
 // -- Beginning of ToolBar -- //
 
+    Component {
+        id: emptyItem
+        Text {
+            text: ""
+        }
+    }
+
     toolBar: BorderImage {
-        id: theToolBar
-        border.bottom: 8
-        source: "images/toolbar.png"
-        width: parent.width
-        height: 100
-
-        Rectangle {
-            id: toolBarRectangle
-            anchors.fill: parent
-            height: parent.height - 25
+            border.bottom: 8
+            source: "images/toolbar.png"
             width: parent.width
-            color: "black"
+            height: appTitle.height * 1.2
 
-            RowLayout {
+            Rectangle {
+                id: backButton
+                width: opacity ? 60 : 0
                 anchors.left: parent.left
+                anchors.leftMargin: 20
+                opacity: stackView.depth > 1 ? 1 : 0
+                anchors.verticalCenter: parent.verticalCenter
+                antialiasing: true
+                height: 60
+                radius: 4
+                color: backmouse.pressed ? "#222" : "transparent"
+                Behavior on opacity { NumberAnimation{} }
+                Image {
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: "images/navigation_previous_item.png"
+                }
+                MouseArea {
+                    id: backmouse
+                    anchors.fill: parent
+                    anchors.margins: -10
+                    onClicked: {
+                        stackView.pop()
+                        console.log("StackView.depth: ", stackView.depth);
+                        console.log("StackView.currentItem: ", stackView.currentItem.objectName);
+                        switch (stackView.currentItem.objectName) {
+                        case "rootView":
+                            menuBarLoader.source = "emptyItem.qml"
+                            break;
+                        case "facilitiesGridView":
+                            menuBarLoader.source = "facilitiesMenu.qml"
+                            break;
+                        }
+                    }
+                }
+            }
+
+            Text {
+                id: appTitle
+                font.pointSize: 32
+                Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
+                x: backButton.x + backButton.width + 20
+                anchors.verticalCenter: parent.verticalCenter
+                color: "white"
+                text: "Access Manager"
+            }
+
+            Rectangle {
+                id: menuBarContainer
+                anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-
-                Rectangle {
-                    id: backButton
-                    width: opacity ? 60 : 0
-                    anchors.left: parent.left
-                    anchors.leftMargin: 20
-                    opacity: stackView.depth > 1 ? 1 : 0
-                    anchors.verticalCenter: parent.verticalCenter
-                    antialiasing: true
-                    height: 60
-                    radius: 4
-                    color: backmouse.pressed ? "#222" : "transparent"
-                    Behavior on opacity { NumberAnimation{} }
-                    Image {
-                        anchors.verticalCenter: parent.verticalCenter
-                        source: "images/navigation_previous_item.png"
-                    }
-                    MouseArea {
-                        id: backmouse
-                        anchors.fill: parent
-                        anchors.margins: -10
-                        onClicked: stackView.pop()
-                    }
-                }
-
-                Text {
-                    font.pixelSize: 42
-                    Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
-                    x: backButton.x + backButton.width + 20
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: "white"
-                    text: "Access Manager"
-                }
-
+                anchors.rightMargin: 10
+                color: "black"
+                height: parent.height - 5
+                width: 500
+//                border.color: "orange"
+//                border.width: 1
                 Loader {
-                    sourceComponent: fakeItem
-                }
+                    id: menuBarLoader
+                    source: "emptyItem.qml"
+    //                sourceComponent: emptyItem
+                    height: parent.height
+                    width: parent.width
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
 
-                Text {
-                    text: "Hello World!"
-                    color: "white"
-                    anchors.right: toolBarRectangle.right
                 }
             }
-        }
-        Component {
-            id: fakeItem
-
-            Button {
-                text: "Click Me!"
-            }
-        }
     }
 
 // --- End of ToolBar -- //
@@ -150,6 +160,7 @@ ApplicationWindow {
         initialItem: Item {
             width: parent.width
             height: parent.height
+            objectName: "rootView"
 
             ListView {
                 model: pageModel
