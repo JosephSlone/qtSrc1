@@ -6,6 +6,7 @@
 
 #include "sqlquerymodel.h"
 #include "facilitymodel.h"
+#include "physicianmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -31,10 +32,16 @@ int main(int argc, char *argv[])
     facilities.select();
     qDebug() << "Facility Rows: " << facilities.rowCount();
 
+    PhysicianModel physicians;
+    physicians.setTable("physician");
+    physicians.select();
+
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("accessList", &accessModel);
     engine.rootContext()->setContextProperty("patientList", &patientModel);
     engine.rootContext()->setContextProperty("facilityList", &facilities);
+    engine.rootContext()->setContextProperty("physicianList", &physicians);
+
     engine.load(QUrl(QStringLiteral("qrc:/MainWindow3.qml")));
 
     QQuickWindow* window = qobject_cast<QQuickWindow*>(engine.rootObjects().at(0));

@@ -17,7 +17,7 @@ void FacilityModel::setTable(const QString &tableName){
 
 
 bool FacilityModel::updateRecord(int recNumber, int facilityId, QString facilityName, QString address,
-                  QString city, QString facilityState, QString zipcode) {
+                  QString city, QString facilityState, QString zipcode, int isActive) {
 
 //    qDebug() << "Calling UpDateRecord()";
 //    qDebug() << "  Record Number: " << recNumber;
@@ -43,6 +43,7 @@ bool FacilityModel::updateRecord(int recNumber, int facilityId, QString facility
     myRecord.setValue("city", city);
     myRecord.setValue("facilityState", facilityState);
     myRecord.setValue("zipcode", zipcode);
+    myRecord.setValue("isActive", isActive);
 
 //    qDebug() << "myRecord: " << myRecord;
     setRecord(recNumber, myRecord);
@@ -63,7 +64,7 @@ bool FacilityModel::updateRecord(int recNumber, int facilityId, QString facility
 }
 
 bool FacilityModel::newRecord(QString facilityName, QString address,
-                  QString city, QString facilityState, QString zipcode) {
+                  QString city, QString facilityState, QString zipcode, int isActive) {
 
     qDebug() << "Calling UpDateRecord()";
     qDebug() << "  FacilityName:  " << facilityName;
@@ -87,6 +88,7 @@ bool FacilityModel::newRecord(QString facilityName, QString address,
     myRecord.setValue("city", city);
     myRecord.setValue("facilityState", facilityState);
     myRecord.setValue("zipcode", zipcode);
+    myRecord.setValue("isActive", isActive);
 
 //    qDebug() << "myRecord: " << myRecord;
     insertRecord(-1, myRecord);

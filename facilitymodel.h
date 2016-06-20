@@ -16,10 +16,10 @@ public:
 public slots:
 
     bool updateRecord(int recNumber, int facilityId, QString facilityName, QString address,
-                      QString city, QString facilityState, QString zipcode);
+                      QString city, QString facilityState, QString zipcode, int isActive);
 
     bool newRecord(QString facilityName, QString address,
-                   QString city, QString facilityState, QString zipcode);
+                   QString city, QString facilityState, QString zipcode, int isActive);
 
 
 };

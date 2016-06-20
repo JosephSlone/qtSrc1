@@ -36,7 +36,8 @@ Rectangle {
                                         facilityAddress: address,
                                         facilityCity: city,
                                         facilityStateName: facilityState,
-                                        facilityZipCode: zipcode
+                                        facilityZipCode: zipcode,
+                                        facilityIsActive: isActive
                                     }
                         }
                     )
@@ -89,16 +90,16 @@ Rectangle {
                     font.pointSize: 12
                 }
 
-//                Text {
-//                    id: dimensions
-//                    text: grid.cellWidth + " X " + grid.cellHeight
-//                    anchors.top: facilityCityState.bottom
-//                    anchors.left: content.left
-//                    anchors.topMargin: 10
-//                    anchors.leftMargin: 10
-//                    color: "orange"
-//                    font.pointSize: 16
-//                }
+                Text {
+                    id: dimensions
+                    text: (isActive == 1) ? "Active" : "Inactive"
+                    anchors.top: facilityCityState.bottom
+                    anchors.left: content.left
+                    anchors.topMargin: 10
+                    anchors.leftMargin: 10
+                    color: "orange"
+                    font.pointSize: 16
+                }
 
                 Rectangle {
                     id: portraitContainer
@@ -133,6 +134,7 @@ Rectangle {
                                             facilityCity: city,
                                             facilityStateName: facilityState,
                                             facilityZipCode: zipcode,
+                                            facilityIsActive: isActive,
                                             editMode: "Edit",
                                         }
                             }

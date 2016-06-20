@@ -1,4 +1,5 @@
 import QtQuick 2.6
+import QtQml 2.2
 import QtQuick.Controls 1.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
@@ -19,6 +20,7 @@ Item {
     property string facilityCity
     property string facilityStateName
     property string facilityZipCode
+    property int facilityIsActive
 
     Component {
        id: textFieldStyle
@@ -221,6 +223,35 @@ Item {
                     style: activeFocus ? textFieldFocused : textFieldStyle
                 }
             }
+
+            Row {
+                id: isActiveRow
+                height: 50
+                width: parent.width
+
+                Label {
+                    id: facilityIsActiveLabel
+                    width: facilityNameLabel.width
+                    height: 30
+                    color: "#ffffff"
+                    text: qsTr("Is Active:")
+                    font.pointSize: 18
+                    font.bold: true
+                }
+
+                Switch {
+                    id: facilityIsActiveField
+                    checked: (facilityIsActive == 1)
+                    style: switchStyle
+                    width: 110
+                    anchors.verticalCenter: facilityIsActiveLabel.verticalCenter
+
+                }
+
+
+            }
+
+
         }
 
         Button {
@@ -247,7 +278,8 @@ Item {
                                               facilityAddressField.text,
                                               facilityCityField.text,
                                               facilityStateField.text,
-                                              facilityZipCodeField.text
+                                              facilityZipCodeField.text,
+                                              (facilityIsActiveField.checked) ? 1: 0
                                               );
                     stackView.pop();
                     setMenuBar();
@@ -262,7 +294,8 @@ Item {
                                               facilityAddressField.text,
                                               facilityCityField.text,
                                               facilityStateField.text,
-                                              facilityZipCodeField.text
+                                              facilityZipCodeField.text,
+                                              (facilityIsActiveField.checked) ? 1: 0
                                               );
                     stackView.pop();
                     setMenuBar();
@@ -289,5 +322,28 @@ Item {
             }
         }
 
+    }
+
+    Component {
+        id: switchStyle
+        SwitchStyle {
+            groove: Rectangle {
+                    implicitWidth: 120
+                    implicitHeight: 40
+                    radius: 10
+                    border.color: control.activeFocus ? "darkblue" : "silver"
+                    border.width: 2
+                    color: control.checked ? "green" : "red"
+            }
+
+            handle: Rectangle {
+                width: parent.parent.width/2
+                height: control.height
+                color: "blue"
+                border.color: "silver"
+                border.width: 2
+                radius: 10
+            }
+        }
     }
 }

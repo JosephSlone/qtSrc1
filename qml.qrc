@@ -35,5 +35,8 @@
         <file>facilitiesMenu.qml</file>
         <file>images/plus-48.png</file>
         <file>images/plus-5-128.png</file>
+        <file>PhysiciansGrid.qml</file>
+        <file>images/checkmark.png</file>
+        <file>PhysicianTypeCell.qml</file>
     </qresource>
 </RCC>

@@ -141,7 +141,7 @@ ApplicationWindow {
         }
         ListElement {
             title: "Physicians"
-            page: "Physicians.qml"
+            page: "PhysiciansGrid.qml"
             icon: "images/doctor.png"
         }
         ListElement {
