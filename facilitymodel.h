@@ -21,6 +21,8 @@ public slots:
     bool newRecord(QString facilityName, QString address,
                    QString city, QString facilityState, QString zipcode, int isActive);
 
+    void setQFilter(QString filterString);
+
 
 };
 

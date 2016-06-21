@@ -15,6 +15,8 @@ public:
 
 public slots:
 
+    void setQFilter(QString filterString);
+
 };
 
 #endif // PHYSICIANMODEL_H

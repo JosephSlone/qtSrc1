@@ -267,11 +267,7 @@ Item {
             isDefault: true
             style: buttonStyle
             onClicked: {
-                console.log("Mode: "+editMode);
                 if (editMode === "Edit") {
-                    console.log("Calling Update Record");
-                    console.log("--------------------");
-                    console.log("Row Number: " + currentId);
                     facilityList.updateRecord(currentId,
                                               facilityId,
                                               facilityNameField.text,
@@ -283,13 +279,9 @@ Item {
                                               );
                     stackView.pop();
                     setMenuBar();
-
                 }
                 else
                 {
-                    console.log("Calling New Record");
-                    console.log("--------------------");
-                    console.log("Row Number: " + currentId);
                     facilityList.newRecord(   facilityNameField.text,
                                               facilityAddressField.text,
                                               facilityCityField.text,

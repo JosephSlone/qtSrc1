@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickWindow>
+#include <QSortFilterProxyModel>
 #include <QDebug>
 
 #include "sqlquerymodel.h"
@@ -19,22 +20,20 @@ int main(int argc, char *argv[])
 
     SqlQueryModel patientModel;
     patientModel.setQuery("SELECT * FROM patients ORDER BY lastname, firstname");
-    qDebug() << "Patient Rows: " << patientModel.rowCount();
 
     SqlQueryModel accessModel;
     accessModel.setQuery("SELECT * FROM accesses");
-    qDebug() << "Access Rows: " << accessModel.rowCount();
 
     FacilityModel facilities;
-    //facilities.setQuery("SELECT * FROM facility ORDER BY facilityName");
     facilities.setTable("facility");
     facilities.setSort(1, Qt::AscendingOrder);
     facilities.select();
-    qDebug() << "Facility Rows: " << facilities.rowCount();
+    facilities.setFilter("isActive = 1");
 
     PhysicianModel physicians;
     physicians.setTable("physician");
     physicians.select();
+    physicians.setFilter("isActive = 1");
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("accessList", &accessModel);

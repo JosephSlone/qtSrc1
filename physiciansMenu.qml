@@ -3,7 +3,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 
 Item {
-    id: facilityMenu
+    id: physicianMenu
 
     default property bool filterValue: true
 
@@ -14,7 +14,7 @@ Item {
                 console.log("New Record Button Clicked")
                 stackView.push(
                     {
-                        item: Qt.resolvedUrl("EditFacility.qml"),
+                        item: Qt.resolvedUrl("physicianEdit.qml"),
                         properties: {
                                     editMode: "New"
                                 }
@@ -36,11 +36,11 @@ Item {
                 checked: filterValue
                 onClicked: {
                     if (checked) {
-                        facilityList.setQFilter("isActive = 1");
+                        physicianList.setQFilter("isActive = 1");
                     }
                     else
                     {
-                        facilityList.setQFilter("isActive = 0");
+                        physicianList.setQFilter("isActive = 0");
                     }
                 }
             }
@@ -53,3 +53,4 @@ Item {
     }
 
 }
+

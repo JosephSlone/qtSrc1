@@ -13,6 +13,9 @@ ApplicationWindow {
     height: 1200
     title: "KDP Access Manager"
 
+    property string subTitleText: ""
+    property bool subTitleVisible: false
+
     function orientationToString(o) {
             switch (o) {
             case Qt.PrimaryOrientation:
@@ -30,18 +33,24 @@ ApplicationWindow {
         }
 
     function setMenuBar() {
-        console.log("StackView.depth: ", stackView.depth);
-        console.log("StackView.currentItem: ", stackView.currentItem.objectName);
+
         switch (stackView.currentItem.objectName) {
         case "rootView":
             menuBarLoader.source = "emptyItem.qml"
+            subTitleText = ""
+            rootWindow.subTitleVisible = false
             break;
         case "facilitiesGridView":
-            menuBarLoader.source = "facilitiesMenu.qml"
+            menuBarLoader.setSource("facilitiesMenu.qml",{"filterValue": true});
+            subTitleText = "Facilities"
+            facilityList.setQFilter("isActive = 1");
+            break;
+        case "physiciansGridView":
+            subTitleText = "Physicians"
+            menuBarLoader.setSource("physiciansMenu.qml", {"filterValue": true});
             break;
         }
     }
-
 
     Rectangle {
         color: "#212126"
@@ -98,8 +107,44 @@ ApplicationWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 color: "white"
                 text: "Access Manager"
+
+                MouseArea {
+                    id: backmouse2
+                    anchors.fill: parent
+                    anchors.margins: -10
+                    onClicked: {
+                        stackView.pop();
+                        setMenuBar();
+                    }
+                }
+
+
             }
 
+            Rectangle {
+                anchors.left: appTitle.right
+                anchors.leftMargin: 15
+                //anchors.verticalCenter: parent.verticalCenter
+                anchors.baseline: appTitle.baseline
+                anchors.baselineOffset: - 15
+                height: subTitle.height + 10
+                width: subTitle.width + 10
+                color: "#3e3c3c"
+                border.color: "grey"
+                border.width: 2
+                radius: 15
+                visible: subTitleVisible
+
+                Label {
+                    id: subTitle
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pointSize: 16
+                    color: "silver"
+                    text: subTitleText
+                    visible: subTitleVisible
+                }
+            }
 
             Rectangle {
                 id: menuBarContainer
@@ -109,19 +154,21 @@ ApplicationWindow {
                 color: "black"
                 height: parent.height - 5
                 width: 500
-//                border.color: "orange"
-//                border.width: 1
                 Loader {
                     id: menuBarLoader
                     source: "emptyItem.qml"
-    //                sourceComponent: emptyItem
                     height: parent.height
                     width: parent.width
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
 
+                    function loaderFunctionDispatcher(caller, arg1) {
+                        console.log("I was called: "+caller+" "+arg1);
+                    }
+
                 }
+
             }
     }
 
@@ -155,6 +202,12 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
+
+        function testFunction() {
+            console.log("test function");
+        }
+
+
         // Implements back key navigation
         focus: true
         Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {

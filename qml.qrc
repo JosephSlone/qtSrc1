@@ -38,5 +38,7 @@
         <file>PhysiciansGrid.qml</file>
         <file>images/checkmark.png</file>
         <file>PhysicianTypeCell.qml</file>
+        <file>physiciansMenu.qml</file>
+        <file>physicianEdit.qml</file>
     </qresource>
 </RCC>

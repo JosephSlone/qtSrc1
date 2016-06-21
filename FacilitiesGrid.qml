@@ -9,8 +9,12 @@ Rectangle {
     id: facilitiesRoot
     objectName: "facilitiesGridView"
 
+    default property bool activeState: true
+
     Component.onCompleted: {
-        menuBarLoader.source = "facilitiesMenu.qml"
+        menuBarLoader.setSource("facilitiesMenu.qml");
+        rootWindow.subTitleText = "Facilities"
+        rootWindow.subTitleVisible = true
     }
 
     Component {
@@ -173,7 +177,6 @@ Rectangle {
 
         model: facilityList
         delegate: facilityDelegate
-        //highlight: Rectangle {width: grid.cellWidth; height: grid.cellHeight; color: "#A9A9A9"; radius: 5 }
         highlight: highlight
         highlightFollowsCurrentItem: true
         focus: true

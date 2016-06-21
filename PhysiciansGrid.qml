@@ -11,14 +11,43 @@ Rectangle {
 
     color: "#847a7a"
 
+    Component.onCompleted: {
+        menuBarLoader.setSource("physiciansMenu.qml");
+        rootWindow.subTitleText = "Physicians"
+        rootWindow.subTitleVisible = true
+    }
+
     Component {
         id: physicianDelegate
+
         Rectangle {
             id: wrapper
             width: grid.cellWidth
             height: grid.cellHeight
             color: "#847a7a"
             z: -1
+
+            Keys.onPressed: {
+                if ((event.key === Qt.Key_Enter) || (event.key === Qt.Key_Return) ) {
+                    console.log('The enter key was pressed');
+    //                facilityList.currentRecord = id;
+    //                stackView.push(
+    //                    {
+    //                        item: Qt.resolvedUrl("EditFacility.qml"),
+    //                        properties: {
+    //                                    currentId: id,
+    //                                    facilityNameTxt: facilityName,
+    //                                    facilityAddress: address,
+    //                                    facilityCity: city,
+    //                                    facilityStateName: facilityState,
+    //                                    facilityZipCode: zipcode,
+    //                                    facilityIsActive: isActive
+    //                                }
+    //                    }
+    //                )
+                    event.accepted = true;
+                }
+            }
 
             Rectangle {
                 id: content
@@ -103,6 +132,32 @@ Rectangle {
                 }
             }
 
+            MouseArea {
+                z: 1
+                anchors.fill: parent
+                onClicked: {
+                    console.log("Mouse Clicked");
+                    facilityList.currentRecord = id;
+                    stackView.push(
+                        {
+                            item: Qt.resolvedUrl("physicianEdit.qml"),
+                            properties: {
+//                                        currentId: index,
+//                                        facilityId: id,
+//                                        facilityNameTxt: facilityName,
+//                                        facilityAddress: address,
+//                                        facilityCity: city,
+//                                        facilityStateName: facilityState,
+//                                        facilityZipCode: zipcode,
+//                                        facilityIsActive: isActive,
+//                                        editMode: "Edit",
+                                    }
+                        }
+                    )
+
+                }
+            }
+
         }
     }
 
@@ -133,8 +188,8 @@ Rectangle {
 
         model: physicianList
         delegate: physicianDelegate
-//        highlight: highlight
-//        highlightFollowsCurrentItem: true
+        highlight: highlight
+        highlightFollowsCurrentItem: true
 
         focus: true
     }

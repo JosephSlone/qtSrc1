@@ -16,6 +16,11 @@ void FacilityModel::setTable(const QString &tableName){
 }
 
 
+void FacilityModel::setQFilter(QString filterString)
+{
+    SqlQueryModel::setFilter(filterString);
+}
+
 bool FacilityModel::updateRecord(int recNumber, int facilityId, QString facilityName, QString address,
                   QString city, QString facilityState, QString zipcode, int isActive) {
 
