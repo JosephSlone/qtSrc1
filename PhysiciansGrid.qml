@@ -30,21 +30,22 @@ Rectangle {
             Keys.onPressed: {
                 if ((event.key === Qt.Key_Enter) || (event.key === Qt.Key_Return) ) {
                     console.log('The enter key was pressed');
-    //                facilityList.currentRecord = id;
-    //                stackView.push(
-    //                    {
-    //                        item: Qt.resolvedUrl("EditFacility.qml"),
-    //                        properties: {
-    //                                    currentId: id,
-    //                                    facilityNameTxt: facilityName,
-    //                                    facilityAddress: address,
-    //                                    facilityCity: city,
-    //                                    facilityStateName: facilityState,
-    //                                    facilityZipCode: zipcode,
-    //                                    facilityIsActive: isActive
-    //                                }
-    //                    }
-    //                )
+                    stackView.push(
+                        {
+                            item: Qt.resolvedUrl("physicianEdit.qml"),
+                            properties: {
+                                currentId: index,
+                                //facilityId: id,
+                                firstName: firstname,
+                                lastName: lastname,
+                                isNephrologist: isNephrologist,
+                                isVascular: isVascular,
+                                isInterventionalist: isInterventionalist,
+                                isActive: isActive,
+                                editMode: "Edit",
+                            }
+                        }
+                    )
                     event.accepted = true;
                 }
             }
@@ -142,15 +143,15 @@ Rectangle {
                         {
                             item: Qt.resolvedUrl("physicianEdit.qml"),
                             properties: {
-//                                        currentId: index,
-//                                        facilityId: id,
-//                                        facilityNameTxt: facilityName,
-//                                        facilityAddress: address,
-//                                        facilityCity: city,
-//                                        facilityStateName: facilityState,
-//                                        facilityZipCode: zipcode,
-//                                        facilityIsActive: isActive,
-//                                        editMode: "Edit",
+                                        currentId: index,
+                                        //facilityId: id,
+                                        firstName: firstname,
+                                        lastName: lastname,
+                                        isNephrologist: isNephrologist,
+                                        isVascular: isVascular,
+                                        isInterventionalist: isInterventionalist,
+                                        isActive: isActive,
+                                        editMode: "Edit",
                                     }
                         }
                     )

@@ -9,6 +9,15 @@ Item {
 
     id: physicianEditor
 
+    property string editMode: "Edit"
+    property int currentId
+    property string firstName
+    property string lastName
+    property bool isActive
+    property bool isNephrologist
+    property bool isVascular
+    property bool isInterventionalist
+
     Component.onCompleted: {
         menuBarLoader.source = "emptyItem.qml"
         rootWindow.subTitleText = "Physician Editor"
@@ -60,21 +69,28 @@ Item {
                 font.pointSize: 18
                 font.bold: true
             }
+        }
+    }
 
-            indicator: Rectangle {
-                    implicitWidth: 36
-                    implicitHeight: 36
+    Component {
+        id: switchStyle
+        SwitchStyle {
+            groove: Rectangle {
+                    implicitWidth: 120
+                    implicitHeight: 40
                     radius: 10
-                    border.color: control.activeFocus ? "darkblue" : "gray"
-                    border.width: 1
-                    Rectangle {
-                        visible: control.checked
-                        color: "green"
-                        border.color: "#333"
-                        radius: 24
-                        anchors.margins: 4
-                        anchors.fill: parent
-                    }
+                    border.color: control.activeFocus ? "darkblue" : "silver"
+                    border.width: 2
+                    color: control.checked ? "green" : "red"
+            }
+
+            handle: Rectangle {
+                width: parent.parent.width/2
+                height: control.height
+                color: "blue"
+                border.color: "silver"
+                border.width: 2
+                radius: 10
             }
         }
     }
@@ -133,7 +149,7 @@ Item {
                 TextField {
                     id: firstNameField
                     font.pointSize: 18
-                    text: ""
+                    text: firstName
                     width: container.width - firstNameLabel.width - 100
                     style: activeFocus ? textFieldFocused : textFieldStyle
                     focus: true
@@ -156,13 +172,14 @@ Item {
                     style: Text.Normal
                     font.bold: true
                     font.pointSize: 18
+                    width: firstNameLabel.width
 
                 }
 
                 TextField {
                     id: lastNameField
                     font.pointSize: 18
-                    text: ""
+                    text: lastName
                     width: container.width - firstNameLabel.width - 100
                     style: activeFocus ? textFieldFocused : textFieldStyle
                     focus: true
@@ -174,36 +191,147 @@ Item {
                 id: checksRow
                 height: 50
                 width: parent.width
-                anchors.leftMargin: 10
 
-                Column {
-                    spacing: 25
-                    anchors.leftMargin: 10
-                    anchors.left: parent.left
+                Label {
+                    id: physicianTypeLabel
+                    height: 30
+                    color: "#ffffff"
+                    text: qsTr("Type(s): ")
+                    verticalAlignment: Text.AlignTop
+                    horizontalAlignment: Text.AlignLeft
+                    style: Text.Normal
+                    font.bold: true
+                    font.pointSize: 18
+                    width: firstNameLabel.width
 
-                    CheckBox {
-                        id: isNephrologistCheckBox
-                        text: "Nephrologist"
-                        checked: false
-                        style: checkboxStyle
+                }
+
+                Rectangle {
+                    width: checkBoxColumn.width + 20
+                    height: checkBoxColumn.height + 20
+                    color: "transparent"
+                    border.color: "grey"
+                    border.width: 3
+                    radius: 10
+
+                    Column {
+                        id: checkBoxColumn
+                        spacing: 25
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+                        anchors.topMargin:  10
+                        anchors.leftMargin: 10
+
+                        CheckBox {
+                            id: isNephrologistCheckBox
+                            text: "Nephrologist"
+                            checked: isNephrologist
+                            style: checkboxStyle
+                        }
+                        CheckBox {
+                            id: isVascularCheckBox
+                            text: "Vascular Surgeon"
+                            checked: isVascular
+                            style: checkboxStyle
+                        }
+                        CheckBox {
+                            id: isInterventionalistCheckBox
+                            text: "Interventionalist"
+                            checked: isInterventionalist
+                            style: checkboxStyle
+                        }
                     }
-                    CheckBox {
-                        id: isVascularCheckBox
-                        text: "Vascular Surgeon"
-                        checked: false
-                        style: checkboxStyle
-                    }
-                    CheckBox {
-                        id: isInterventionalistCheckBox
-                        text: "Interventionalist"
-                        checked: false
-                        style: checkboxStyle
-                    }
+                }
+            }
+
+            Row {
+                id: isActiveRow
+                height: 50
+                width: parent.width
+
+                Label {
+                    id: isActiveLabel
+                    height: 30
+                    width: firstNameLabel.width
+                    color: "#ffffff"
+                    text: qsTr("Is Active: ")
+                    verticalAlignment: Text.AlignTop
+                    horizontalAlignment: Text.AlignLeft
+                    style: Text.Normal
+                    font.bold: true
+                    font.pointSize: 18
+
+                }
+
+                Switch {
+                    id: isActiveSlider
+                    style: switchStyle
+                    width: 110
+                    anchors.verticalCenter: isActiveLabel.verticalCenter
+
                 }
 
             }
-
-
         }
+        Button {
+            id: saveButton
+            anchors.top: column.bottom
+            anchors.topMargin: 25
+            anchors.right: cancelButton.left
+            anchors.rightMargin: 25
+            height: 40
+            text: qsTr("Save")
+            activeFocusOnPress: true
+            tooltip: "Save Changes"
+            isDefault: true
+            style: buttonStyle
+            onClicked: {
+                if (editMode === "Edit") {
+//                    facilityList.updateRecord(currentId,
+//                                              facilityId,
+//                                              facilityNameField.text,
+//                                              facilityAddressField.text,
+//                                              facilityCityField.text,
+//                                              facilityStateField.text,
+//                                              facilityZipCodeField.text,
+//                                              (facilityIsActiveField.checked) ? 1: 0
+//                                              );
+                    stackView.pop();
+                    setMenuBar();
+                }
+                else
+                {
+//                    facilityList.newRecord(   facilityNameField.text,
+//                                              facilityAddressField.text,
+//                                              facilityCityField.text,
+//                                              facilityStateField.text,
+//                                              facilityZipCodeField.text,
+//                                              (facilityIsActiveField.checked) ? 1: 0
+//                                              );
+                    stackView.pop();
+                    setMenuBar();
+
+                }
+            }
+        }
+
+        Button {
+            id: cancelButton
+            anchors.right: column.right
+            anchors.rightMargin: 50
+            anchors.top: column.bottom
+            anchors.topMargin: 25
+            height: 40
+            text: qsTr("Cancel")
+            activeFocusOnPress: true
+            tooltip: "Cancel Changes"
+            isDefault: true
+            style: buttonStyle
+            onClicked: {
+                stackView.pop();
+                setMenuBar();
+            }
+        }
+
     }
 }
