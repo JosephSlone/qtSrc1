@@ -3,6 +3,8 @@ import QtQml 2.2
 import QtQuick.Controls 1.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Dialogs 1.2
+import QtQuick.Window 2.0
 
 
 Item {
@@ -17,6 +19,7 @@ Item {
     property bool isNephrologist
     property bool isVascular
     property bool isInterventionalist
+    property string portraitFileLocation
 
     Component.onCompleted: {
         menuBarLoader.source = "emptyItem.qml"
@@ -52,10 +55,18 @@ Item {
         id: buttonStyle
         ButtonStyle {
             background: Rectangle {
-                border.color: control.activeFocus ? "orange" : "grey"
+                border.color: control.activeFocus ? "orange" : "silver"
                 border.width: control.activeFocus ? 6 : 1
-                implicitWidth: 120
+                implicitWidth: 128
                 radius: control.activeFocus ? 10 : 5
+                color: "brown"
+            }
+            label: Text {
+                font.pointSize: 16
+                color: "white"
+                text: control.text
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
             }
         }
     }
@@ -245,6 +256,59 @@ Item {
             }
 
             Row {
+                id: fileDialogRow
+                height: 50
+                width: parent.width
+                spacing: 25
+
+                FileDialog {
+                    id: fileDialog
+                    objectName: "fileBrowser"
+                    title: "Select Portrait"
+                    folder: "file:///c:/databases/"
+                    nameFilters: [ "Image files (*.jpeg *.jpg *.png)", "All files (*)" ]
+
+                    onAccepted: {
+                        portraitFileLocation = fileDialog.fileUrl;
+                    }
+
+                    onRejected: {
+                        console.log("You canceled ...");
+                    }
+
+                }
+
+                Button {
+                    height: 40
+                    text: qsTr("Portrait File")
+                    activeFocusOnPress: true
+                    tooltip: "Select Portrait File"
+                    isDefault: true
+                    style: buttonStyle
+                    onClicked: {
+                            fileDialog.open();
+                    }
+
+                }
+
+                Label {
+                    id: portraitFileLabel
+                    height: 30
+                    color: "#ffffff"
+                    text: {portraitFileLocation.substring(portraitFileLocation.lastIndexOf('/')+1);}
+                    verticalAlignment: Text.AlignTop
+                    horizontalAlignment: Text.AlignLeft
+                    style: Text.Normal
+                    font.bold: false
+                    font.pointSize: 16
+
+
+                }
+
+
+            }
+
+            Row {
                 id: isActiveRow
                 height: 50
                 width: parent.width
@@ -264,11 +328,11 @@ Item {
                 }
 
                 Switch {
-                    id: isActiveSlider
+                    id: isActiveSwitch
                     style: switchStyle
                     width: 110
                     anchors.verticalCenter: isActiveLabel.verticalCenter
-
+                    checked: {isActive}
                 }
 
             }
@@ -287,27 +351,28 @@ Item {
             style: buttonStyle
             onClicked: {
                 if (editMode === "Edit") {
-//                    facilityList.updateRecord(currentId,
-//                                              facilityId,
-//                                              facilityNameField.text,
-//                                              facilityAddressField.text,
-//                                              facilityCityField.text,
-//                                              facilityStateField.text,
-//                                              facilityZipCodeField.text,
-//                                              (facilityIsActiveField.checked) ? 1: 0
-//                                              );
+                    physicianList.updateRecord(currentId,
+                                              firstNameField.text,
+                                              lastNameField.text,
+                                              portraitFileLocation,
+                                              (isNephrologistCheckBox.checked) ? 1: 0,
+                                              (isVascularCheckBox.checked) ? 1: 0,
+                                              (isInterventionalistCheckBox.checked) ? 1: 0,
+                                              (isActiveSwitch.checked) ? 1: 0
+                                              );
                     stackView.pop();
                     setMenuBar();
                 }
                 else
                 {
-//                    facilityList.newRecord(   facilityNameField.text,
-//                                              facilityAddressField.text,
-//                                              facilityCityField.text,
-//                                              facilityStateField.text,
-//                                              facilityZipCodeField.text,
-//                                              (facilityIsActiveField.checked) ? 1: 0
-//                                              );
+                    physicianList.newRecord(firstNameField.text,
+                                            lastNameField.text,
+                                            portraitFileLocation,
+                                            (isNephrologistCheckBox.checked) ? 1: 0,
+                                            (isVascularCheckBox.checked) ? 1: 0,
+                                            (isInterventionalistCheckBox.checked) ? 1: 0,
+                                            (isActiveSwitch.checked) ? 1: 0
+                                              );
                     stackView.pop();
                     setMenuBar();
 

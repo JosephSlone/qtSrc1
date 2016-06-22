@@ -17,6 +17,14 @@ public slots:
 
     void setQFilter(QString filterString);
 
+    bool updateRecord(int recNumber, QString firstName, QString lastName,
+                      QString portraitFile, int isNephrologist, int isVascular,
+                      int isInterventionalist, int isActive);
+
+    bool newRecord(QString firstName, QString lastName,
+                   QString portraitFile, int isNephrologist, int isVascular,
+                   int isInterventionalist, int isActive);
+
 };
 
 #endif // PHYSICIANMODEL_H

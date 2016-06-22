@@ -3,6 +3,8 @@
 #include <QQmlContext>
 #include <QQuickWindow>
 #include <QSortFilterProxyModel>
+#include <QList>
+
 #include <QDebug>
 
 #include "sqlquerymodel.h"

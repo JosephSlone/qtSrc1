@@ -42,6 +42,7 @@ Rectangle {
                                 isVascular: isVascular,
                                 isInterventionalist: isInterventionalist,
                                 isActive: isActive,
+                                portraitFileLocation: portrait_source,
                                 editMode: "Edit",
                             }
                         }
@@ -72,14 +73,27 @@ Rectangle {
                     font.pointSize: 16
                 }
 
-                Image {
-                    id: img
-                    source: "file:///c:/databases/"+portrait_source
-                    anchors.left: content.left
+                Rectangle {
+                    height: parent.height * 0.5
+                    width: parent.width * 0.5
                     anchors.top: physicianName.bottom
-                    anchors.margins: 10
+                    anchors.topMargin: 10
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    color: parent.color
 
+                    Image {
+                        id: img
+                        source: portrait_source
+                        width: parent.height
+                        height: parent.width
+                        fillMode: Image.PreserveAspectFit
+                        verticalAlignment: Image.AlignTop
+                        horizontalAlignment: Image.AlignLeft
+                    }
                 }
+
+
 
                 Rectangle {
                     id: physicianStates
@@ -151,6 +165,7 @@ Rectangle {
                                         isVascular: isVascular,
                                         isInterventionalist: isInterventionalist,
                                         isActive: isActive,
+                                        portraitFileLocation: portrait_source,
                                         editMode: "Edit",
                                     }
                         }
